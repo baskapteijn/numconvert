@@ -2,13 +2,13 @@
 
 An easy-to-use tool for numeric conversions between Binary, Decimal and Hexadecimal.
 
-Usage:
+## Usage
 
-**Binary:**
+### Binary conversion
 
 user@host:~$ numconvert 0110000101001110b
 
-Decimal:
+Decimal
   24910
 Binary:
   0000 0000 0000 0000 0000 0000 0000 0000 
@@ -16,7 +16,7 @@ Binary:
 Hexadecimal:
   0x614e
   
-**Decimal:**
+### Decimal conversion
 
 user@host:~$ numconvert 12345678
 
@@ -28,7 +28,7 @@ Binary:
 Hexadecimal:
   0xbc614e
 
-**Hexadecimal:**
+### Hexadecimal conversion
 
 user@host:~$ numconvert 0x12345678
 
