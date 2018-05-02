@@ -130,7 +130,6 @@ static int ParseBinary(const char *string, size_t len, uint64_t *number)
 static int ParseDecimal(const char *string, size_t len, uint64_t *number)
 {
     uint64_t val = 0;
-    int retval = 0;
     int64_t i = 0;
     uint64_t value = 0;
 
@@ -143,7 +142,7 @@ static int ParseDecimal(const char *string, size_t len, uint64_t *number)
         val *= 10;
     }
 
-    return retval;
+    return 0;
 }
 
 static int ParseHexadecimal(const char *string, size_t len, uint64_t *number)
