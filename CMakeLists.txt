@@ -3,4 +3,4 @@ project(numconvert C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(numconvert main.c)
+add_executable(numconvert src/main.c)
