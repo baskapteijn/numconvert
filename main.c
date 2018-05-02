@@ -30,6 +30,13 @@ static int ParseString(const char *string, size_t len, uint64_t *number, char ba
 static int CheckString(const char *string, size_t len, char *base);
 static void PrintHelp(void);
 
+/*!
+ * \brief Convert a character to it's lowercase equivalent (when required).
+ * \param c
+ *      The character to convert.
+ * \returns
+ *      The lowercase equivalent of c or c when no conversion was required.
+ */
 static char ToLower(char c)
 {
     if ((c >= 'A') && (c <= 'Z')) {
@@ -39,6 +46,13 @@ static char ToLower(char c)
     return c;
 }
 
+/*!
+ * \brief Indicate if a character represents a valid Binary character.
+ * \param c
+ *      The character to verify.
+ * \returns
+ *      true if the character represents a valid Binary character, otherwise false.
+ */
 static bool IsBinaryChar(char c)
 {
     bool isBinaryChar = false;
@@ -50,6 +64,13 @@ static bool IsBinaryChar(char c)
     return isBinaryChar;
 }
 
+/*!
+ * \brief Indicate if a character represents a valid Decimal character.
+ * \param c
+ *      The character to verify.
+ * \returns
+ *      true if the character represents a valid Decimal character, otherwise false.
+ */
 static bool IsDecimalChar(char c)
 {
     bool isDecimalChar = false;
@@ -61,6 +82,13 @@ static bool IsDecimalChar(char c)
     return isDecimalChar;
 }
 
+/*!
+ * \brief Indicate if a character represents a valid Hexadecimal character.
+ * \param c
+ *      The character to verify.
+ * \returns
+ *      true if the character represents a valid Hexadecimal character, otherwise false.
+ */
 static bool IsHexadecimalChar(char c)
 {
     bool isHexaDecimalChar = false;
@@ -73,6 +101,11 @@ static bool IsHexadecimalChar(char c)
     return isHexaDecimalChar;
 }
 
+/*!
+ * \brief Print a number in Binary format to the console.
+ * \param number
+ *      The number to print.
+ */
 static void PrintBinary(uint64_t number)
 {
     int64_t i = 0;
@@ -100,18 +133,39 @@ static void PrintBinary(uint64_t number)
     printf("\r");
 }
 
+/*!
+ * \brief Print a number in Decimal format to the console.
+ * \param number
+ *      The number to print.
+ */
 static void PrintDecimal(uint64_t number)
 {
     printf("Decimal:\n");
     printf("  %llu\n", (unsigned long long)number);
 }
 
+/*!
+ * \brief Print a number in Hexadecimal format to the console.
+ * \param number
+ *      The number to print.
+ */
 static void PrintHexadecimal(uint64_t number)
 {
     printf("Hexadecimal:\n");
     printf("  0x%llx\n", (long long unsigned int)number);
 }
 
+/*!
+ * \brief Parse a string that represents a Binary value and returns its value.
+ * \param string
+ *      The string to parse.
+ * \param len
+ *      The length of the input string (excluding the string terminator).
+ * \number[out]
+ *      The number represented by the numeric string.
+ * \returns
+ *      Always 0 (successful).
+ */
 static int ParseBinary(const char *string, size_t len, uint64_t *number)
 {
     int64_t i = 0;
@@ -127,10 +181,20 @@ static int ParseBinary(const char *string, size_t len, uint64_t *number)
     return 0;
 }
 
+/*!
+ * \brief Parse a string that represents a Decimal value and returns its value.
+ * \param string
+ *      The string to parse.
+ * \param len
+ *      The length of the input string (excluding the string terminator).
+ * \number[out]
+ *      The number represented by the numeric string.
+ * \returns
+ *      Always 0 (successful).
+ */
 static int ParseDecimal(const char *string, size_t len, uint64_t *number)
 {
     uint64_t val = 0;
-    int retval = 0;
     int64_t i = 0;
     uint64_t value = 0;
 
@@ -143,9 +207,20 @@ static int ParseDecimal(const char *string, size_t len, uint64_t *number)
         val *= 10;
     }
 
-    return retval;
+    return 0;
 }
 
+/*!
+ * \brief Parse a string that represents a Hexadecimal value and returns its value.
+ * \param string
+ *      The string to parse.
+ * \param len
+ *      The length of the input string (excluding the string terminator).
+ * \number[out]
+ *      The number represented by the numeric string.
+ * \returns
+ *      Always 0 (successful).
+ */
 static int ParseHexadecimal(const char *string, size_t len, uint64_t *number)
 {
     int64_t i = 0;
@@ -184,6 +259,15 @@ static int ParseHexadecimal(const char *string, size_t len, uint64_t *number)
     return 0;
 }
 
+/*!
+ * \brief Indicate if a string represents a valid Binary value.
+ * \param string
+ *      The string to verify.
+ * \param len
+ *      The length of the input string (excluding the string terminator).
+ * \returns
+ *      true if the string represents a valid Binary value, otherwise false.
+ */
 static bool IsBinary(const char *string, size_t len)
 {
     bool isBinary = false;
@@ -210,6 +294,15 @@ static bool IsBinary(const char *string, size_t len)
     return isBinary;
 }
 
+/*!
+ * \brief Indicate if a string represents a valid Decimal value.
+ * \param string
+ *      The string to verify.
+ * \param len
+ *      The length of the input string (excluding the string terminator).
+ * \returns
+ *      true if the string represents a valid Decimal value, otherwise false.
+ */
 static bool IsDecimal(const char *string, size_t len)
 {
     bool isDecimal = true;
@@ -245,6 +338,15 @@ static bool IsDecimal(const char *string, size_t len)
     return isDecimal;
 }
 
+/*!
+ * \brief Indicate if a string represents a valid Hexadecimal value.
+ * \param string
+ *      The string to verify.
+ * \param len
+ *      The length of the input string (excluding the string terminator).
+ * \returns
+ *      true if the string represents a valid Hexadecimal value, otherwise false.
+ */
 static bool IsHexadecimal(const char *string, size_t len)
 {
     bool isHexaDecimal = false;
@@ -285,6 +387,13 @@ static bool IsHexadecimal(const char *string, size_t len)
     return isHexaDecimal;
 }
 
+/*!
+ * \brief Print a number to the console in Binary, Decimal and Hexadecimal.
+ * \param number
+ *      The number to print.
+ * \returns
+ *      0 in case of successful completion or any other value in case of an error.
+ */
 static int PrintNumerals(uint64_t number)
 {
     printf("\n");
@@ -303,6 +412,19 @@ static int PrintNumerals(uint64_t number)
     return 0;
 }
 
+/*!
+ * \brief Parse an input string and return it's represented value as a number.
+ * \param string
+ *      The input string to parse.
+ * \param len
+ *      The length of the input string (excluding the string terminator).
+ * \param[out] number
+ *      The number represented by the numeric string in case it checked-out.
+ * \param base
+ *      The base of the numeric string.
+ * \returns
+ *      0 in case of successful completion or any other value in case of an error.
+ */
 static int ParseString(const char *string, size_t len, uint64_t *number, const char base)
 {
     int retval = 0;
@@ -325,6 +447,17 @@ static int ParseString(const char *string, size_t len, uint64_t *number, const c
     return retval;
 }
 
+/*!
+ * \brief Check an input string to be an expected numeric string.
+ * \param string
+ *      The input string to check.
+ * \param len
+ *      The length of the input string (excluding the string terminator).
+ * \param[out] base
+ *      The base of the numeric string in case it checked-out.
+ * \returns
+ *      0 in case of successful completion or any other value in case of an error.
+ */
 static int CheckString(const char *string, size_t len, char *base)
 {
     /* Is the len okay? */
@@ -354,6 +487,9 @@ static int CheckString(const char *string, size_t len, char *base)
     return -1;
 }
 
+/*!
+ * \brief Print the help menu to the console.
+ */
 static void PrintHelp(void)
 {
     printf("Usage:\n");
@@ -371,15 +507,19 @@ static void PrintHelp(void)
 }
 
 /*!
- * \brief
+ * \brief This is the program entry.
  * \details
  *      Expected arguments (lower and uppercase allowed):
  *          Decimal value, f.e.: 102245
  *          Hexadecimal value, f.e.: 12345h or 0x12345
  *          Binary value, f.e.: 011010110b
+ *      Only values between 0 - 2^64 are allowed.
  * \param argc
+ *      The number of string pointed to by argv (argument count).
  * \param argv
- * \return
+ *      A list of strings (argument vector).
+ * \returns
+ *      0 in case of successful completion or any other value in case of an error.
  */
 int main(int argc, char *argv[])
 {
