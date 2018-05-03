@@ -1,11 +1,11 @@
 # Numconvert
 
-An easy-to-use tool for numeric conversions between Binary, Decimal and Hexadecimal.
+An easy-to-use tool for numeric conversions between Binary, Decimal and Hexadecimal for Windows and
+Linux.
 
 ## Prerequisites
 
-This readme assumes a Debian based host machine. A Windows based machine should also be possible to  
-build and run the tool when the prerequisites are met.
+This readme assumes a Debian or Windows based host machine.
 
 * CMake 2.5.1 or higher
 * GNU 5.4.0 C compiler or compatible
@@ -13,8 +13,9 @@ build and run the tool when the prerequisites are met.
 ## Building
 
 From the build directory:
-```
-user@host:/src/numconvert/build$ cmake ..
+```bash
+$ cd build
+$ cmake ..
 -- The C compiler identification is GNU 5.4.0
 -- The CXX compiler identification is GNU 5.4.0
 -- Check for working C compiler: /usr/bin/cc
@@ -32,7 +33,8 @@ user@host:/src/numconvert/build$ cmake ..
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /src/numconvert/build
-user@host:/src/numconvert/build$ make
+
+$ make
 Scanning dependencies of target numconvert
 [ 50%] Building C object CMakeFiles/numconvert.dir/src/main.c.o
 [100%] Linking C executable numconvert
@@ -43,8 +45,8 @@ Scanning dependencies of target numconvert
 
 ### Binary conversion
 
-```
-user@host:~$ numconvert 0110000101001110b
+```bash
+$ numconvert 0110000101001110b
 
 Decimal:
   24910
@@ -57,8 +59,8 @@ Hexadecimal:
 
 ### Decimal conversion
 
-```
-user@host:~$ numconvert 12345678
+```bash
+$ numconvert 12345678
 
 Decimal:
   12345678
@@ -71,8 +73,8 @@ Hexadecimal:
 
 ### Hexadecimal conversion
 
-```
-user@host:~$ numconvert 0x12345678
+```bash
+$ numconvert 0x12345678
 
 Decimal:
   305419896
