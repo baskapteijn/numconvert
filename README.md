@@ -2,6 +2,45 @@
 
 An easy-to-use tool for numeric conversions between Binary, Decimal and Hexadecimal.
 
+## Prerequisites
+
+This readme assumes a Debian based host machine. A Windows based machine should also be possible to  
+build and run the tool when the prerequisites are met.
+
+* CMake 2.5.1 or higher
+* GNU 5.4.0 C compiler or compatible
+
+## Building
+
+From the build directory:
+
+```
+user@host:/src/numconvert/build$ cmake ..
+-- The C compiler identification is GNU 5.4.0
+-- The CXX compiler identification is GNU 5.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /src/numconvert/build
+user@host:/src/numconvert/build$ make
+Scanning dependencies of target numconvert
+[ 50%] Building C object CMakeFiles/numconvert.dir/src/main.c.o
+[100%] Linking C executable numconvert
+[100%] Built target numconvert
+
+```
+
 ## Usage
 
 ### Binary conversion
