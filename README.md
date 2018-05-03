@@ -13,7 +13,6 @@ build and run the tool when the prerequisites are met.
 ## Building
 
 From the build directory:
-
 ```
 user@host:/src/numconvert/build$ cmake ..
 -- The C compiler identification is GNU 5.4.0
@@ -38,12 +37,12 @@ Scanning dependencies of target numconvert
 [ 50%] Building C object CMakeFiles/numconvert.dir/src/main.c.o
 [100%] Linking C executable numconvert
 [100%] Built target numconvert
-
 ```
 
 ## Usage
 
 ### Binary conversion
+
 ```
 user@host:~$ numconvert 0110000101001110b
 
@@ -55,7 +54,9 @@ Binary:
 Hexadecimal:
   0x614e
 ```
+
 ### Decimal conversion
+
 ```
 user@host:~$ numconvert 12345678
 
@@ -67,7 +68,9 @@ Binary:
 Hexadecimal:
   0xbc614e
 ```
+
 ### Hexadecimal conversion
+
 ```
 user@host:~$ numconvert 0x12345678
 
