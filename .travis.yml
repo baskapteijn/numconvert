@@ -1,0 +1,16 @@
+language: c
+compiler: gcc
+sudo: false
+
+addons:
+  apt:
+    sources:
+      - george-edison55-precise-backports
+    packages:
+      - cmake-data
+      - cmake
+
+script:
+  - cd /src/
+  - cmake ..
+  - make
