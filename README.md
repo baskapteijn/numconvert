@@ -6,8 +6,8 @@ An easy-to-use tool for numeric conversions between Binary, Decimal and Hexadeci
 
 This readme assumes a Linux or Windows based host machine.
 
-* CMake 2.5.1 or higher
-* GNU 5.4.0 C compiler or compatible
+* CMake 3.2.3 or higher
+* GNU 4.8.4 C compiler or compatible
 
 ## Building
 
