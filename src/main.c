@@ -1,8 +1,26 @@
+/*
+ * This file is part of the numconvert distribution (https://github.com/baskapteijn/numconvert).
+ * Copyright (c) 2018 Bas Kapteijn.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
 #include <assert.h>
+#include "version.h"
 
 #define BINARY_STRING_LEN_MAX           65
 #define DECIMAL_STRING_LEN_MAX          20
@@ -492,6 +510,8 @@ static int CheckString(const char *string, size_t len, char *base)
  */
 static void PrintHelp(void)
 {
+    printf("Version %s\n\n", GetVersionString());
+
     printf("Usage:\n");
     printf("  numconvert [prefix]<value>[postfix]\n");
 
