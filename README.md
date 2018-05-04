@@ -4,7 +4,7 @@ An easy-to-use tool for numeric conversions between Binary, Decimal and Hexadeci
 
 ## Prerequisites
 
-This readme assumes a Debian based host machine. A Windows based machine should also be possible to  
+This readme assumes a Debian based host machine. A Windows based machine should also be possible to 
 build and run the tool when the prerequisites are met.
 
 * CMake 2.5.1 or higher
