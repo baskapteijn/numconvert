@@ -20,3 +20,5 @@ deploy:
   api_key: $GITHUB_API_KEY
   file: numconvert
   skip_cleanup: true
+  on:
+    tags: true
