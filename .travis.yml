@@ -14,3 +14,9 @@ script:
   - cd build/
   - cmake ..
   - make
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_API_KEY
+  file: numconvert
+  skip_cleanup: true
