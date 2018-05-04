@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5.1)
+cmake_minimum_required(VERSION 3.2.3)
 project(numconvert)
 
 set(CMAKE_C_STANDARD 99)

@@ -11,6 +11,6 @@ addons:
       - cmake
 
 script:
-  - cd /src/
+  - cd build/
   - cmake ..
   - make
