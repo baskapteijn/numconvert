@@ -1,11 +1,10 @@
 # Numconvert
 
-An easy-to-use tool for numeric conversions between Binary, Decimal and Hexadecimal for Windows and
-Linux.
+An easy-to-use tool for numeric conversions between Binary, Decimal and Hexadecimal.
 
 ## Prerequisites
 
-This readme assumes a Debian or Windows based host machine.
+This readme assumes a Linux or Windows based host machine.
 
 * CMake 2.5.1 or higher
 * GNU 5.4.0 C compiler or compatible
