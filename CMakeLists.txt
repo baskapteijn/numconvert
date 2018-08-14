@@ -3,6 +3,9 @@ project(numconvert)
 
 set(CMAKE_C_STANDARD 99)
 
-set(SOURCE_FILES src/main.c src/version.h)
+set(SRC_DIR src)
+include_directories(${SRC_DIR})
+
+set(SOURCE_FILES ${SRC_DIR}/main.c ${SRC_DIR}/version.h)
 
 add_executable(numconvert ${SOURCE_FILES})
