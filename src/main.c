@@ -19,7 +19,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
-#include <assert.h>
 #include "version.h"
 
 #define BINARY_STRING_LEN_MAX           65
@@ -458,7 +457,7 @@ static int ParseString(const char *string, size_t len, uint64_t *number, const c
             retval = ParseHexadecimal(string, len, number);
             break;
         default:
-            assert(false);
+            retval = -1;
             break;
     }
 
