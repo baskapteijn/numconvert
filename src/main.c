@@ -21,11 +21,11 @@
 #include <string.h>
 #include "version.h"
 
-#define BINARY_STRING_LEN_MAX           65
-#define DECIMAL_STRING_LEN_MAX          20
-#define HEXADECIMAL_H_STRING_LEN_MAX    17
-#define HEXADECIMAL_0X_STRING_LEN_MAX   18
-#define BUFFER_SIZE                     (65 + 1) /* Binary max + string terminator. */
+#define BINARY_STRING_LEN_MAX           65u
+#define DECIMAL_STRING_LEN_MAX          20u
+#define HEXADECIMAL_H_STRING_LEN_MAX    17u
+#define HEXADECIMAL_0X_STRING_LEN_MAX   18u
+#define BUFFER_SIZE                     (BINARY_STRING_LEN_MAX + 1u) /* + string terminator. */
 
 /* UINT64_MAX equivalent string. */
 const char *DecimalStringValueMax = "18446744073709551615";
