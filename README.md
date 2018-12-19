@@ -1,7 +1,7 @@
 # Numconvert
 [![Build Status](https://travis-ci.org/baskapteijn/numconvert.svg?branch=master)](https://travis-ci.org/baskapteijn/numconvert)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/baskapteijn/numconvert.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/baskapteijn/numconvert/alerts/)
-[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/baskapteijn/numconvert.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/baskapteijn/numconvert/context:cpp)
+[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/baskapteijn/numconvert.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/baskapteijn/numconvert/context:cpp)  
 An easy-to-use tool for numeric conversions between Binary, Decimal and Hexadecimal.
 
 ## Prerequisites
