@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/baskapteijn/numconvert.svg?branch=master)](https://travis-ci.org/baskapteijn/numconvert)
+
 # Numconvert
 
 An easy-to-use tool for numeric conversions between Binary, Decimal and Hexadecimal.
