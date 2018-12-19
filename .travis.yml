@@ -12,7 +12,7 @@ addons:
 
 script:
   - cd build/
-  - cmake ..
+  - cmake -D CMAKE_BUILD_TYPE=Release ..
   - make
 
 deploy:
