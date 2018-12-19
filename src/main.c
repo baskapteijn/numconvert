@@ -42,7 +42,7 @@ static int ParseHexadecimal(const char *string, size_t len, uint64_t *number);
 static bool IsBinary(const char *string, size_t len);
 static bool IsDecimal(const char *string, size_t len);
 static bool IsHexadecimal(const char *string, size_t len);
-static int PrintNumerals(uint64_t number);
+static void PrintNumerals(uint64_t number);
 static int ParseString(const char *string, size_t len, uint64_t *number, char base);
 static int CheckString(const char *string, size_t len, char *base);
 static void PrintHelp(void);
@@ -408,10 +408,8 @@ static bool IsHexadecimal(const char *string, size_t len)
  * \brief Print a number to the console in Binary, Decimal and Hexadecimal.
  * \param number
  *      The number to print.
- * \returns
- *      0 in case of successful completion or any other value in case of an error.
  */
-static int PrintNumerals(uint64_t number)
+static void PrintNumerals(uint64_t number)
 {
     printf("\n");
 
@@ -425,8 +423,6 @@ static int PrintNumerals(uint64_t number)
     PrintHexadecimal(number);
 
     printf("\n");
-
-    return 0;
 }
 
 /*!
@@ -582,11 +578,7 @@ int main(int argc, char *argv[])
         return retval;
     }
 
-    retval = PrintNumerals(number);
-    if (retval != 0) {
-        PrintHelp();
-        return retval;
-    }
+    PrintNumerals(number);
 
     return 0;
 }
