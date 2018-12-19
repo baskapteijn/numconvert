@@ -15,13 +15,16 @@ gcc -Wall -fprofile-arcs -ftest-coverage ../src/main.c
 ./a.out b
 ./a.out h
 ./a.out 111h
-./a.out 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+./a.out 111111111111111111111111111111111111111111111111111111111111111111
 ./a.out 112b
 ./a.out Aah
 ./a.out 18446744073709551616
 ./a.out 0xg
 ./a.out
 ./a.out ""
+./a.out 0b
+./a.out -1
+./a.out 0x/
 
 # Output the coverage result
 gcov main.c
