@@ -39,7 +39,16 @@ Scanning dependencies of target numconvert
 [100%] Linking C executable numconvert
 [100%] Built target numconvert
 ```
-
+To switch between Release and Debug builds you can specify the option in the CMake command line:
+```bash
+$ cmake -D CMAKE_BUILD_TYPE=Debug ..
+$ make
+```
+or:
+```bash
+$ cmake -D CMAKE_BUILD_TYPE=Release ..
+$ make
+```
 ## Usage
 
 ### Binary conversion
