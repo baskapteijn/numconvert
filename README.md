@@ -51,6 +51,31 @@ or:
 $ cmake -D CMAKE_BUILD_TYPE=Release ..
 $ make
 ```
+## Coverage
+
+Coverage generation with the shell script has only been tested on a Linux based host machine.  
+Make sure that the coverage.sh has execute permission and that [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) 1.12 or compatible has been installed.
+
+From the coverage directory:
+
+```bash
+$ ./coverage.sh 
+Reading data file coverage.info
+Found 2 entries.
+Found common filename prefix "/src/numconvert"
+Writing .css and .png files.
+Generating output.
+Processing file src/main.c
+Processing file src/version.h
+Writing directory view page.
+Overall coverage rate:
+  lines......: 97.2% (205 of 211 lines)
+  functions..: 100.0% (19 of 19 functions)
+  branches...: 93.4% (114 of 122 branches)
+Script completed. See index.html for results.
+```
+The resulting index.html can be opened to view the coverage results.
+
 ## Usage
 
 ### Binary conversion
