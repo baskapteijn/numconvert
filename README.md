@@ -8,8 +8,19 @@ An easy-to-use tool for numeric conversions between Binary, Decimal and Hexadeci
 
 This readme assumes a Linux or Windows based host machine.
 
-* CMake 3.2.3 or higher
-* GNU 4.8.4 C compiler or compatible
+### For building
+
+* [CMake](https://cmake.org/) 3.2.3 or higher
+* [GNU](https://gcc.gnu.org/) 4.8.4 C compiler or compatible
+
+### For coverage
+
+* [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) 1.12 or compatible
+
+### For profiling
+
+* [Valgrind](http://www.valgrind.org/) 3.11.0 or compatible
+* [KCachegrind](https://kcachegrind.github.io/html/Home.html) 0.7.4kde or compatible
 
 ## Building
 
@@ -54,7 +65,7 @@ $ make
 ## Coverage
 
 Coverage generation with the bash script has only been tested on a Linux based host machine.  
-Make sure that the coverage.sh has execute permission and that [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) 1.12 or compatible has been installed.
+Make sure that the coverage.sh has execute permission.
 
 From the coverage directory:
 
@@ -74,12 +85,12 @@ Overall coverage rate:
   branches...: 93.4% (114 of 122 branches)
 Script completed. See index.html for results.
 ```
-Your default browser will automatically display the results.
+The default browser will automatically display the results.
 
 ## Profiling
 
 Profiling with the bash script has only been tested on a Linux based host machine.  
-Make sure that the profile.sh has execute permission and that [valgrind](http://www.valgrind.org/) 3.11.0 and [kcachegrind](https://kcachegrind.github.io/html/Home.html) 0.7.4kde or compatible have been installed.  
+Make sure that the profile.sh has execute permission.  
 The script will handle up to 1 argument and will pass this into numconvert_prof for profiling.
 
 From the profiling directory:
