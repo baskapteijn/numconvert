@@ -12,33 +12,33 @@ exit_on_error()
 
 # Compile the program with coverage options
 {
-    gcc -Wall -fprofile-arcs -ftest-coverage ../src/main.c
+    gcc -Wall -fprofile-arcs -ftest-coverage ../src/main.c -o numconvert_cov
 } &> /dev/null
 rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
 
 # Execute the program and try to cover as much as possible
 # Ignore return codes, this is not a component test but purely for coverage
 {
-    ./a.out 1111111111111111111111111111111111111111111111111111111111111111b
-    ./a.out 111111111111111111111111111111111111111111111111111111111111111b
-    ./a.out 18446744073709551615
-    ./a.out 0xffffffffffffffff
-    ./a.out 0xfffffffffffffffff
-    ./a.out 0x0
-    ./a.out b
-    ./a.out h
-    ./a.out 111h
-    ./a.out 111111111111111111111111111111111111111111111111111111111111111111
-    ./a.out 112b
-    ./a.out Aah
-    ./a.out 18446744073709551616
-    ./a.out 0xg
-    ./a.out
-    ./a.out ""
-    ./a.out 0b
-    ./a.out -1
-    ./a.out 0x/
-    ./a.out 0z
+    ./numconvert_cov 1111111111111111111111111111111111111111111111111111111111111111b
+    ./numconvert_cov 111111111111111111111111111111111111111111111111111111111111111b
+    ./numconvert_cov 18446744073709551615
+    ./numconvert_cov 0xffffffffffffffff
+    ./numconvert_cov 0xfffffffffffffffff
+    ./numconvert_cov 0x0
+    ./numconvert_cov b
+    ./numconvert_cov h
+    ./numconvert_cov 111h
+    ./numconvert_cov 111111111111111111111111111111111111111111111111111111111111111111
+    ./numconvert_cov 112b
+    ./numconvert_cov Aah
+    ./numconvert_cov 18446744073709551616
+    ./numconvert_cov 0xg
+    ./numconvert_cov
+    ./numconvert_cov ""
+    ./numconvert_cov 0b
+    ./numconvert_cov -1
+    ./numconvert_cov 0x/
+    ./numconvert_cov 0z
 } &> /dev/null
 
 # Output the coverage result
