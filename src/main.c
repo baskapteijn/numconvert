@@ -127,27 +127,27 @@ static void PrintBinary(uint64_t number)
 {
     int64_t i = 0;
 
-    printf("Binary:\n");
-    printf("  ");
+    printf("Binary:\n  ");
 
     for (i = 63; i >= 0; i--) {
         if (((number >> i) & 0x1) == 0x1) {
-            printf("1");
+            putchar('1');
         } else {
-            printf("0");
+            putchar('0');
         }
 
         if (i % 4 == 0) {
-            printf(" ");
+            putchar(' ');
         }
 
         if (i % 32 == 0) {
-            printf("\n");
-            printf("  ");
+            putchar('\n');
+            putchar(' ');
+            putchar(' ');
         }
     }
 
-    printf("\r");
+    putchar('\r');
 }
 
 /*!
@@ -411,7 +411,7 @@ static bool IsHexadecimal(const char *string, size_t len)
  */
 static void PrintNumerals(uint64_t number)
 {
-    printf("\n");
+    putchar('\n');
 
     /* Decimal. */
     PrintDecimal(number);
@@ -422,7 +422,7 @@ static void PrintNumerals(uint64_t number)
     /* Hexadecimal. */
     PrintHexadecimal(number);
 
-    printf("\n");
+    putchar('\n');
 }
 
 /*!
