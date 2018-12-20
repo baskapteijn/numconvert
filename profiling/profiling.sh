@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Prerequisites
 # Install valgrind (f.e. for Ubuntu use "sudo apt-get install valgrind")
 # Install kcachegrind (f.e. for Ubuntu use "sudo apt-get install kcachegrind")
