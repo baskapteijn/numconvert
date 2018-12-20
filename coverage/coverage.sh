@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Prerequisites
 # Install lcov (f.e. for Ubuntu use "sudo apt-get install lcov")
 
@@ -63,6 +63,9 @@ rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
 genhtml --branch-coverage coverage.info
 rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
 
-echo "Script completed. See index.html for results."
+sensible-browser index.html
+rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
+
+echo "Script completed."
 
 exit 0
