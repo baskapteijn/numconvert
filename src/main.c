@@ -138,12 +138,12 @@ static void PrintBinary(uint64_t number)
 
         if (i % 4 == 0) {
             putchar(' ');
-        }
 
-        if (i % 32 == 0) {
-            putchar('\n');
-            putchar(' ');
-            putchar(' ');
+            if (i % 32 == 0) {
+                putchar('\n');
+                putchar(' ');
+                putchar(' ');
+            }
         }
     }
 
