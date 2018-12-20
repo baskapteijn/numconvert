@@ -38,6 +38,7 @@ rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
     ./a.out 0b
     ./a.out -1
     ./a.out 0x/
+    ./a.out 0z
 } &> /dev/null
 
 # Output the coverage result
