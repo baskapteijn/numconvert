@@ -76,6 +76,20 @@ Script completed. See index.html for results.
 ```
 The resulting index.html can be opened to view the coverage results.
 
+## Profiling
+
+Profiling with the shell script has only been tested on a Linux based host machine.  
+Make sure that the profile.sh has execute permission and that [valgrind](http://www.valgrind.org/) 3.11.0 and [kcachegrind](https://kcachegrind.github.io/html/Home.html) 0.7.4kde or compatible have been installed.  
+The script will handle up to 1 argument and will pass this into numconvert_prof for profiling.
+
+From the profiling directory:
+
+```bash
+$ ./profiling.sh 0x12345678
+Script completed.
+```
+KCachegrind will automatically display the current results.
+
 ## Usage
 
 ### Binary conversion
