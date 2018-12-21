@@ -10,11 +10,18 @@ addons:
       - cmake-data
       - cmake
       - lcov
+      - valgrind
+      - kcachegrind
 
 script:
   - cd build/
   - cmake -D CMAKE_BUILD_TYPE=Release ..
   - make
+  - cd ../profiling
+  - ./memcheck 42
+  - ./memcheck 0x42
+  - ./memcheck 42h
+  - ./memcheck 101010b
   - cd ../test/functional/
   - ./functional_test.sh
   - cd ../../coverage/
