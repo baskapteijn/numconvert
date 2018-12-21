@@ -16,6 +16,8 @@ script:
   - make
   - cd ../test/functional/
   - ./functional_test.sh
+  - cd ../../coverage/
+  - ./coverage.sh
 
 deploy:
   provider: releases
