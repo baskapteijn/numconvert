@@ -160,6 +160,15 @@ int main(int argc, char *argv[])
 
         stdoutLine = fgets(stdoutString, sizeof(stdoutString), stdoutFp);
         if (stdoutLine == NULL) {
+            stdoutExpLine = fgets(stdoutExpString, sizeof(stdoutExpString), stdoutExpFp);
+            if (stdoutExpLine != NULL) {
+                printf("stdout mismatch\n");
+
+                printf("  line %u (stdout strlen < stdout expected strlen)\n", lineNumber);
+                printf("  output:\n");
+                printf("  expected output: %s\n", stdoutExpLine);
+                return STDIO_OUTPUT_FAILURE_CODE;
+            }
             break;
         }
 

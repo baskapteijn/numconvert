@@ -13,4 +13,3 @@ Postfixes:
   b or B,   to indicate a binary value
   h or H,   to indicate a hexadecimal value
 
-
