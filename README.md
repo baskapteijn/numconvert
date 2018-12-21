@@ -76,14 +76,14 @@ Found 2 entries.
 Found common filename prefix "/src/numconvert"
 Writing .css and .png files.
 Generating output.
-Processing file src/main.c
 Processing file src/version.h
+Processing file src/main.c
 Writing directory view page.
 Overall coverage rate:
-  lines......: 97.2% (205 of 211 lines)
+  lines......: 96.8% (210 of 217 lines)
   functions..: 100.0% (19 of 19 functions)
-  branches...: 93.4% (114 of 122 branches)
-Script completed. See index.html for results.
+  branches...: 94.3% (115 of 122 branches)
+Script completed.
 ```
 The default browser will automatically display the results.
 
@@ -100,6 +100,31 @@ $ ./profiling.sh 0x12345678
 Script completed.
 ```
 KCachegrind will automatically display the results.
+
+## Tests
+
+### Functional tests
+
+Functional tests with the bash script have only been tested on a Linux based host machine.  
+Make sure that the functional_test.sh has execute permission. 
+
+```bash
+$ ./functional_test.sh 
+Test 1:successful
+Test 2:successful
+Test 3:successful
+Test 4:successful
+Test 5:successful
+Test 6:successful
+Test 7:successful
+Test 8:successful
+Test 9:successful
+Test 10:successful
+Test 11:successful
+Test 12:successful
+Test 13:successful
+Script completed.
+```
 
 ## Usage
 
