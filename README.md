@@ -67,6 +67,8 @@ $ make
 Coverage generation with the bash script has only been tested on a Linux based host machine.  
 Make sure that the coverage.sh has execute permission.
 
+The coverage script will run a predefined set of tests to get as much coverage as possible.
+
 From the coverage directory:
 
 ```bash
@@ -89,7 +91,9 @@ The default browser will automatically display the results.
 
 ## Profiling
 
-Profiling with the bash script has only been tested on a Linux based host machine.  
+### Visual profiling
+
+Visual profiling with the bash script has only been tested on a Linux based host machine.  
 Make sure that the profile.sh has execute permission.  
 The script will handle up to 1 argument and will pass this into numconvert_prof for profiling.
 
@@ -101,12 +105,52 @@ Script completed.
 ```
 KCachegrind will automatically display the results.
 
+### Memcheck
+
+Memcheck with the bash script has only been tested on a Linux based host machine.  
+Make sure that the memcheck.sh has execute permission.  
+The script will handle up to 1 argument and will pass this into numconvert_prof for memory checking.
+
+From the profiling directory:
+
+```bash
+$ ./memcheck.sh 0x42
+==6563== Memcheck, a memory error detector
+==6563== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==6563== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==6563== Command: ./numconvert_prof 0x42
+==6563== 
+
+Decimal:
+  66
+Binary:
+  0000 0000 0000 0000 0000 0000 0000 0000 
+  0000 0000 0000 0000 0000 0000 0100 0010 
+Hexadecimal:
+  0x42
+
+==6563== 
+==6563== HEAP SUMMARY:
+==6563==     in use at exit: 0 bytes in 0 blocks
+==6563==   total heap usage: 1 allocs, 1 frees, 1,024 bytes allocated
+==6563== 
+==6563== All heap blocks were freed -- no leaks are possible
+==6563== 
+==6563== For counts of detected and suppressed errors, rerun with: -v
+==6563== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+Script completed.
+```
+
 ## Tests
 
 ### Functional tests
 
 Functional tests with the bash script have only been tested on a Linux based host machine.  
 Make sure that the functional_test.sh has execute permission. 
+
+The functional test script will run a predefined set of tests to functionally test as much possible.
+
+From the test/functional/ directory:
 
 ```bash
 $ ./functional_test.sh 
