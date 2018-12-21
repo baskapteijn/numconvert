@@ -60,9 +60,7 @@ rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
 rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
 
 # Generate html representation
-{
-    genhtml --branch-coverage coverage.info
-} &> /dev/null
+genhtml --branch-coverage coverage.info
 rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
 
 {
