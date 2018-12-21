@@ -18,10 +18,10 @@ script:
   - cmake -D CMAKE_BUILD_TYPE=Release ..
   - make
   - cd ../profiling
-  - ./memcheck 42
-  - ./memcheck 0x42
-  - ./memcheck 42h
-  - ./memcheck 101010b
+  - ./memcheck.sh 42
+  - ./memcheck.sh 0x42
+  - ./memcheck.sh 42h
+  - ./memcheck.sh 101010b
   - cd ../test/functional/
   - ./functional_test.sh
   - cd ../../coverage/
