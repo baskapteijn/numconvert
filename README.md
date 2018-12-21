@@ -67,6 +67,8 @@ $ make
 Coverage generation with the bash script has only been tested on a Linux based host machine.  
 Make sure that the coverage.sh has execute permission.
 
+The coverage script will run a predefined set of tests to get as much coverage as possible.
+
 From the coverage directory:
 
 ```bash
@@ -89,11 +91,27 @@ The default browser will automatically display the results.
 
 ## Profiling
 
+### Visual profiling
+
+Visual profiling with the bash script has only been tested on a Linux based host machine.  
+Make sure that the profile.sh has execute permission.  
+The script will handle up to 1 argument and will pass this into numconvert_prof for profiling.
+
+From the profiling directory:
+
+```bash
+$ ./profiling.sh 0x12345678
+Script completed.
+```
+KCachegrind will automatically display the results.
+
 ### Memcheck
 
 Memcheck with the bash script has only been tested on a Linux based host machine.  
 Make sure that the memcheck.sh has execute permission.  
 The script will handle up to 1 argument and will pass this into numconvert_prof for memory checking.
+
+From the profiling directory:
 
 ```bash
 $ ./memcheck.sh 0x42
@@ -123,26 +141,16 @@ Hexadecimal:
 Script completed.
 ```
 
-### Visual profiling
-
-Visual profiling with the bash script has only been tested on a Linux based host machine.  
-Make sure that the profile.sh has execute permission.  
-The script will handle up to 1 argument and will pass this into numconvert_prof for profiling.
-
-From the profiling directory:
-
-```bash
-$ ./profiling.sh 0x12345678
-Script completed.
-```
-KCachegrind will automatically display the results.
-
 ## Tests
 
 ### Functional tests
 
 Functional tests with the bash script have only been tested on a Linux based host machine.  
 Make sure that the functional_test.sh has execute permission. 
+
+The functional test script will run a predefined set of tests to functionally test as much possible.
+
+From the test/functional/ directory:
 
 ```bash
 $ ./functional_test.sh 
