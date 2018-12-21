@@ -20,7 +20,7 @@ rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
 } &> /dev/null
 rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
 
-./functional "numconvert 0x12"
+./functional "./numconvert" "0x1ff2" "0" "1"
 rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
 
 echo "Script completed."
