@@ -9,6 +9,7 @@ addons:
     packages:
       - cmake-data
       - cmake
+      - lcov
 
 script:
   - cd build/
