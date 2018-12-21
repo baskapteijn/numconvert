@@ -139,7 +139,7 @@ static void PrintBinary(uint64_t number)
         if (i % 4 == 0) {
             putchar(' ');
 
-            if (i % 32 == 0) {
+            if (i == 32) {
                 putchar('\n');
                 putchar(' ');
                 putchar(' ');
@@ -147,7 +147,7 @@ static void PrintBinary(uint64_t number)
         }
     }
 
-    putchar('\r');
+    putchar('\n');
 }
 
 /*!
@@ -518,7 +518,7 @@ static void PrintHelp(void)
 
     printf("\nPostfixes:\n");
     printf("  b or B,   to indicate a binary value\n");
-    printf("  h or H,   to indicate a hexadecimal value\n");
+    printf("  h or H,   to indicate a hexadecimal value\n\n");
 }
 
 /*!

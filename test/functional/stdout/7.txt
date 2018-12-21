@@ -1,0 +1,15 @@
+Version 1.0.1
+
+Usage:
+  numconvert [prefix]<value>[postfix]
+
+No prefix/postfix:
+            to indicate a decimal value
+
+Prefixes:
+  0x or 0X, to indicate a hexadecimal value
+
+Postfixes:
+  b or B,   to indicate a binary value
+  h or H,   to indicate a hexadecimal value
+
