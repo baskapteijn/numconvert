@@ -4,8 +4,10 @@
 #include <stdbool.h>
 #include <string.h>
 
-#define STRING_LENGTH_MAX       100u /* 99 + string terminator */
-#define DECIMAL_STRING_LEN_MAX  3u
+#define STRING_LENGTH_MAX           100u /* 99 + string terminator */
+#define DECIMAL_STRING_LEN_MAX      3u
+
+#define STDOUT_STRING_LENGTH_MAX    512u
 
 #define RETURN_VALUE_FAILURE_CODE   100u
 #define STDIO_OUTPUT_FAILURE_CODE   200u
@@ -33,7 +35,6 @@ static bool IsDecimalChar(char c)
 
     return isDecimalChar;
 }
-
 
 /*!
  * \brief Indicate if a string represents a valid Decimal value.
@@ -79,45 +80,129 @@ static bool IsDecimal(const char *string, size_t len)
     return isDecimal;
 }
 
+/*!
+ * \brief This is the program entry.
+ * \details
+ *      Test an executable with a list of input arguments and compare its returned value and stdout
+ *      data to a predefined set.
+ *
+ *      Expected arguments:
+ *          argv[0] is this executable path
+ *          argv[1] is the test name, f.e. "1" or "1a"
+ *          argv[2] is the test executable system path, f.e. "./numconvert"
+ *          argv[3] is the test input value, f.e. "0x12" or "" or even "1 2"
+ *          argv[4] is the test expected return value, f.e. "0" between 0 and 255
+ *          argv[5] is the test file that contains the expected (stdout)output, f.e. "tests/1.txt"
+ * \param argc
+ *      The number of string pointed to by argv (argument count).
+ * \param argv
+ *      A list of strings (argument vector).
+ * \returns
+ *      0 in case of successful completion or any other value in case of an error.
+ */
 int main(int argc, char *argv[])
 {
-    char *line = 0;
-    char stdoutString[512];
+    char *stdoutLine = 0;
+    char *stdoutExpLine = 0;
+    char stdoutString[STDOUT_STRING_LENGTH_MAX];
+    char stdoutExpString[STDOUT_STRING_LENGTH_MAX];
     char string[STRING_LENGTH_MAX];
     int retval = 0;
-    FILE *fp = 0;
+    int stdoutStrLen = 0;
+    int stdoutExpStrLen = 0;
+    uint32_t i = 0;
+    uint32_t lineNumber = 0;
+    FILE *stdoutFp = 0;
+    FILE *stdoutExpFp = 0;
 
     /* Parse the arguments.
      *
      * argv[0] is this executable path
-     * argv[1] is the test executable system path, f.e. "./numconvert"
-     * argv[2] is the test input value, f.e. "0x12" or ""
-     * argv[3] is the test expected return value, f.e. "0" between 0 and 255
-     * argv[4] is the test file that contains the expected (stdout)output, f.e. "tests/1.txt"
-     *
-     * TODO: add verbosity argument to enable printing of return codes on error and stdout on error
+     * argv[1] is the test name, f.e. "1" or "1a"
+     * argv[2] is the test executable system path, f.e. "./numconvert"
+     * argv[3] is the test input value, f.e. "0x12" or ""
+     * argv[4] is the test expected return value, f.e. "0" between 0 and 255
+     * argv[5] is the test file that contains the expected (stdout)output, f.e. "tests/1.txt"
      */
+    if (argc >= 2) {
+        printf("Test %s:", argv[1]);
+    }
 
     /* Check arguments. */
-    if (argc != 5) {
+    if (argc != 6) {
         /* Missing or too many arguments. */
+        printf("argument mismatch\n");
         return -1;
     }
 
-    if (IsDecimal(argv[3], strlen(argv[3])) == false) {
+    if (IsDecimal(argv[4], strlen(argv[4])) == false) {
         /* The given return value is not a decimal character. */
+        printf("invalid expected return value\n");
         return -1;
     }
 
-    snprintf(string, STRING_LENGTH_MAX, "%s %s", argv[1], argv[2]);
+    snprintf(string, STRING_LENGTH_MAX, "%s %s", argv[2], argv[3]);
 
-    fp = popen(string, "r");
+    stdoutFp = popen(string, "r");
+    if (stdoutFp == NULL) {
+        printf("unable to open test executable\n");
+        return -1;
+    }
+    stdoutExpFp = fopen(argv[5], "r");
+    if (stdoutExpFp == NULL) {
+        printf("unable to open file with expected stdout output\n");
+        return -1;
+    }
+
+    lineNumber = 0;
     while (1) {
-        line = fgets(stdoutString, sizeof(stdoutString), fp);
-        if (line == NULL) {
+        lineNumber++;
+
+        stdoutLine = fgets(stdoutString, sizeof(stdoutString), stdoutFp);
+        if (stdoutLine == NULL) {
             break;
         }
-        printf("%s", line); //TODO: remove when test works
+
+        stdoutExpLine = fgets(stdoutExpString, sizeof(stdoutExpString), stdoutExpFp);
+        if (stdoutExpLine == NULL) {
+            printf("stdout mismatch\n");
+
+            printf("  line %u (stdout output > stdout expected output)\n", lineNumber);
+            printf("  output:       %s", stdoutLine);
+            printf("  check output:\n");
+            return 0;
+        }
+
+        /* Check string length. */
+        stdoutStrLen = strlen(stdoutLine);
+        stdoutExpStrLen = strlen(stdoutExpLine);
+        if (stdoutStrLen > stdoutExpStrLen) {
+            printf("stdout mismatch\n");
+
+            printf("  line %u (stdout strlen > stdout expected strlen)\n", lineNumber);
+            printf("  output:       %s", stdoutLine);
+            printf("  expected output: %s\n", stdoutExpLine);
+            return 0;
+        } else if (stdoutStrLen < stdoutExpStrLen) {
+            printf("stdout mismatch\n");
+
+            printf("  line %u (stdout strlen < stdout expected strlen)\n", lineNumber);
+            printf("  output:       %s", stdoutLine);
+            printf("  expected output: %s\n", stdoutExpLine);
+            return 0;
+        }
+
+        /* Check characters. */
+        for (i = 0; i < strlen(stdoutLine); i++) {
+            if (stdoutLine[i] != stdoutExpLine[i]) {
+                printf("stdout mismatch\n");
+
+                printf("  line %u:%u\n", lineNumber, i + 1);
+                printf("  output:       %s", stdoutLine);
+                printf("  expected output: %s\n", stdoutExpLine);
+                return 0;
+            }
+        }
     }
 
     /* Close the process and get the return value.
@@ -133,10 +218,18 @@ int main(int argc, char *argv[])
      * Under certain circumstances, the shell will use special values to indicate specific failure
      * modes.
      */
-    retval = WEXITSTATUS(pclose(fp));
-    if (retval != atoi(argv[3])) {
-        return RETURN_VALUE_FAILURE_CODE;
+    retval = WEXITSTATUS(pclose(stdoutFp));
+    if (retval != atoi(argv[4])) {
+        printf("return value mismatch\n");
+        printf("  got %d expected %d\n", retval, atoi(argv[4]));
+        return 0;
     }
+
+    /* Close the stdout output test file. */
+    (void)fclose(stdoutExpFp);
+
+    /* We reached the end, print the result. */
+    printf("successful\n");
 
     return 0;
 }
