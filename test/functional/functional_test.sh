@@ -20,7 +20,8 @@ rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
 } &> /dev/null
 rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
 
-# Perform a number of tests decimal tests
+
+# Perform a number of decimal input tests
 ./functional "1" "./numconvert" "0" "0" "tests/1.txt"                       #lower decimal boundary
 rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
 
@@ -32,6 +33,38 @@ rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
 
 ./functional "4" "./numconvert" "18446744073709551616" "255" "tests/4.txt"  #invalid upper decimal boundary
 rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
+
+
+# Perform a number of binary input tests
+./functional "5" "./numconvert" "0b" "0" "tests/5.txt"                       #lower binary boundary
+rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
+
+./functional "6" "./numconvert" "1111111111111111111111111111111111111111111111111111111111111111b" "0" "tests/6.txt"       #upper binary boundary
+rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
+
+./functional "7" "./numconvert" "11111111111111111111111111111111111111111111111111111111111111111b" "255" "tests/7.txt"    #invalid upper binary boundary
+rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
+
+
+# Perform a number of hexadecimal input tests
+./functional "8" "./numconvert" "0x0" "0" "tests/8.txt"                     #lower hexadecimal boundary
+rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
+
+./functional "9" "./numconvert" "0h" "0" "tests/9.txt"                      #lower hexadecimal boundary
+rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
+
+./functional "10" "./numconvert" "0xffffffffffffffff" "0" "tests/10.txt"    #upper hexadecimal boundary
+rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
+
+./functional "11" "./numconvert" "ffffffffffffffffh" "0" "tests/11.txt"     #upper hexadecimal boundary
+rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
+
+./functional "12" "./numconvert" "0x1ffffffffffffffff" "255" "tests/12.txt"   #invalid upper hexadecimal boundary
+rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
+
+./functional "13" "./numconvert" "1ffffffffffffffffh" "255" "tests/13.txt"    #invalidupper hexadecimal boundary
+rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
+
 
 echo "Script completed."
 
