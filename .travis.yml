@@ -14,7 +14,7 @@ script:
   - cd build/
   - cmake -D CMAKE_BUILD_TYPE=Release ..
   - make
-  - cd stdout/functional/
+  - cd ../test/functional/
   - ./functional_test.sh
 
 deploy:
