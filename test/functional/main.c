@@ -170,7 +170,7 @@ int main(int argc, char *argv[])
             printf("  line %u (stdout output > stdout expected output)\n", lineNumber);
             printf("  output:       %s", stdoutLine);
             printf("  check output:\n");
-            return 0;
+            return STDIO_OUTPUT_FAILURE_CODE;
         }
 
         /* Check string length. */
@@ -182,14 +182,14 @@ int main(int argc, char *argv[])
             printf("  line %u (stdout strlen > stdout expected strlen)\n", lineNumber);
             printf("  output:       %s", stdoutLine);
             printf("  expected output: %s\n", stdoutExpLine);
-            return 0;
+            return STDIO_OUTPUT_FAILURE_CODE;
         } else if (stdoutStrLen < stdoutExpStrLen) {
             printf("stdout mismatch\n");
 
             printf("  line %u (stdout strlen < stdout expected strlen)\n", lineNumber);
             printf("  output:       %s", stdoutLine);
             printf("  expected output: %s\n", stdoutExpLine);
-            return 0;
+            return STDIO_OUTPUT_FAILURE_CODE;
         }
 
         /* Check characters. */
@@ -200,7 +200,7 @@ int main(int argc, char *argv[])
                 printf("  line %u:%u\n", lineNumber, i + 1);
                 printf("  output:       %s", stdoutLine);
                 printf("  expected output: %s\n", stdoutExpLine);
-                return 0;
+                return STDIO_OUTPUT_FAILURE_CODE;
             }
         }
     }
@@ -222,7 +222,7 @@ int main(int argc, char *argv[])
     if (retval != atoi(argv[4])) {
         printf("return value mismatch\n");
         printf("  got %d expected %d\n", retval, atoi(argv[4]));
-        return 0;
+        return RETURN_VALUE_FAILURE_CODE;
     }
 
     /* Close the stdout output test file. */
