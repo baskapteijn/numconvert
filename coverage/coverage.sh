@@ -63,7 +63,9 @@ rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
 genhtml --branch-coverage coverage.info
 rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
 
-sensible-browser index.html
+{
+    sensible-browser index.html &
+} &> /dev/null
 rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
 
 echo "Script completed."

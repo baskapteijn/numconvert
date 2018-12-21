@@ -9,13 +9,16 @@ addons:
     packages:
       - cmake-data
       - cmake
+      - lcov
 
 script:
   - cd build/
   - cmake -D CMAKE_BUILD_TYPE=Release ..
   - make
-  - cd test/functional/
+  - cd ../test/functional/
   - ./functional_test.sh
+  - cd ../../coverage/
+  - ./coverage.sh
 
 deploy:
   provider: releases
