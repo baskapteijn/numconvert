@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.2.3)
-project(numconvert)
-
-set(CMAKE_C_STANDARD 99)
+project(numconvert C)
 
 set(SRC_DIR src)
 include_directories(${SRC_DIR})
