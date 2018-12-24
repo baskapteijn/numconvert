@@ -137,6 +137,12 @@ rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 ./functional "32" "./numconvert" "" "255" "stdout/32.txt"                       #invalid
 rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 
+./functional "33" "./numconvert" "0z" "255" "stdout/33.txt"                     #invalid hexadecimal
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
+./functional "34" "./numconvert" " " "255" "stdout/34.txt"                      #invalid
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
 echo "Script completed."
 
 exit $EXIT_FAILURE
