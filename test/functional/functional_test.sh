@@ -71,15 +71,32 @@ rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 
 
 # Perform a number of ECP tests
-./functional "14" "./numconvert" "9223372036854775808" "0" "stdout/14.txt"     #decimal ECP mid
+./functional "14" "./numconvert" "9223372036854775808" "0" "stdout/14.txt"      #decimal ECP mid
 rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 
 ./functional "15" "./numconvert" "1000000000000000000000000000000000000000000000000000000000000000b" "0" "stdout/15.txt"     #binary ECP mid
 rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 
-./functional "16" "./numconvert" "0x8000000000000000" "0" "stdout/16.txt"     #hexadecimal ECP mid
+./functional "16" "./numconvert" "0x8000000000000000" "0" "stdout/16.txt"       #hexadecimal ECP mid
 rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 
+
+# Perform a number of tests with upper to lower case conversion
+
+./functional "17" "./numconvert" "0xaBcDe" "0" "stdout/17.txt"                  #prefixed hexadecimal caps
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
+./functional "18" "./numconvert" "0XAbCdE" "0" "stdout/18.txt"                  #prefixed caps hexadecimal caps
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
+./functional "19" "./numconvert" "aBcDeh" "0" "stdout/19.txt"                   #postfixed hexadecimal caps
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
+./functional "20" "./numconvert" "AbCdEH" "0" "stdout/20.txt"                   #postfixed caps hexadecimal caps
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
+./functional "21" "./numconvert" "1001B" "0" "stdout/21.txt"                    #postfixed caps binary
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 
 echo "Script completed."
 
