@@ -125,6 +125,18 @@ rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 ./functional "28" "./numconvert" "1/b" "255" "stdout/28.txt"                    #invalid binary
 rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 
+./functional "29" "./numconvert" "b" "255" "stdout/29.txt"                      #invalid binary
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
+./functional "30" "./numconvert" "0x" "255" "stdout/30.txt"                     #invalid hexadecimal
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
+./functional "31" "./numconvert" "h" "255" "stdout/31.txt"                      #invalid hexadecimal
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
+./functional "32" "./numconvert" "" "255" "stdout/32.txt"                       #invalid
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
 echo "Script completed."
 
 exit $EXIT_FAILURE
