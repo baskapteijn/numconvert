@@ -25,7 +25,7 @@ rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
 # This is required for the Travis CI server to detect a failed test, test execution or script failure
 
 
-# Perform a number of decimal input tests
+# Perform a number of decimal boundary tests
 ./functional "1" "./numconvert" "0" "0" "stdout/1.txt"                          #lower decimal boundary
 rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 
@@ -39,7 +39,7 @@ rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 
 
-# Perform a number of binary input tests
+# Perform a number of binary boundary tests
 ./functional "5" "./numconvert" "0b" "0" "stdout/5.txt"                         #lower binary boundary
 rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 
@@ -50,7 +50,7 @@ rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 
 
-# Perform a number of hexadecimal input tests
+# Perform a number of hexadecimal boundary tests
 ./functional "8" "./numconvert" "0x0" "0" "stdout/8.txt"                        #lower hexadecimal boundary
 rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 
@@ -66,7 +66,18 @@ rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 ./functional "12" "./numconvert" "0x1ffffffffffffffff" "255" "stdout/12.txt"    #invalid upper hexadecimal boundary
 rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 
-./functional "13" "./numconvert" "1ffffffffffffffffh" "255" "stdout/13.txt"     #invalidupper hexadecimal boundary
+./functional "13" "./numconvert" "1ffffffffffffffffh" "255" "stdout/13.txt"     #invalid upper hexadecimal boundary
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
+
+# Perform a number of ECP tests
+./functional "14" "./numconvert" "9223372036854775808" "0" "stdout/14.txt"     #decimal ECP mid
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
+./functional "15" "./numconvert" "1000000000000000000000000000000000000000000000000000000000000000b" "0" "stdout/15.txt"     #binary ECP mid
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
+./functional "16" "./numconvert" "0x8000000000000000" "0" "stdout/16.txt"     #hexadecimal ECP mid
 rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 
 
