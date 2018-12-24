@@ -143,6 +143,15 @@ rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 ./functional "34" "./numconvert" " " "255" "stdout/34.txt"                      #invalid
 rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 
+./functional "35" "./numconvert" "NOARG" "255" "stdout/35.txt"                  #invalid
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
+./functional "36" "./numconvert" "123456789012345678901" "255" "stdout/36.txt"  #invalid decimal
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
+./functional "37" "./numconvert" "0xg" "255" "stdout/37.txt"                    #invalid hexadecimal
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
 echo "Script completed."
 
 exit $EXIT_FAILURE
