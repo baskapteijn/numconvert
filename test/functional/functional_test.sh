@@ -98,6 +98,33 @@ rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 ./functional "21" "./numconvert" "1001B" "0" "stdout/21.txt"                    #postfixed caps binary
 rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
 
+
+# Perform 0 input tests
+
+./functional "22" "./numconvert" "0" "0" "stdout/22.txt"                        #decimal 0
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
+./functional "23" "./numconvert" "0x0" "0" "stdout/23.txt"                      #prefixed hexadecimal 0
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
+./functional "24" "./numconvert" "0h" "0" "stdout/24.txt"                       #postfixed hexadecimal 0
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
+./functional "25" "./numconvert" "0b" "0" "stdout/25.txt"                       #postfixed binary 0
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
+
+# Perform invalid input tests
+
+./functional "26" "./numconvert" "3/" "255" "stdout/26.txt"                     #invalid decimal
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
+./functional "27" "./numconvert" "0x3/" "255" "stdout/27.txt"                   #invalid hexadecimal
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
+./functional "28" "./numconvert" "1/b" "255" "stdout/28.txt"                    #invalid binary
+rc=$?; if [[ $rc != 0 ]]; then EXIT_FAILURE=$rc; fi
+
 echo "Script completed."
 
 exit $EXIT_FAILURE
