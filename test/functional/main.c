@@ -115,15 +115,6 @@ int main(int argc, char *argv[])
     FILE *stdoutFp = 0;
     FILE *stdoutExpFp = 0;
 
-    /* Parse the arguments.
-     *
-     * argv[0] is this executable path
-     * argv[1] is the test name, f.e. "1" or "1a"
-     * argv[2] is the test executable system path, f.e. "./numconvert"
-     * argv[3] is the test input value, f.e. "0x12" or ""
-     * argv[4] is the test expected return value, f.e. "0" between 0 and 255
-     * argv[5] is the test file that contains the expected (stdout)output, f.e. "tests/1.txt"
-     */
     if (argc >= 2) {
         printf("Test %s:", argv[1]);
     }
