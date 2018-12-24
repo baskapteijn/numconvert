@@ -349,6 +349,8 @@ static bool IsDecimal(const char *string, size_t len)
                     break;
                 }
             }
+        } else if (len > DECIMAL_STRING_LEN_MAX) {
+            isDecimal = false;
         }
     }
 
