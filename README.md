@@ -166,6 +166,8 @@ Script completed.
 
 ### Binary conversion
 
+For binary input postfix 'b' can be used.
+
 ```bash
 $ numconvert 0110000101001110b
 
@@ -176,6 +178,7 @@ Binary:
   0000 0000 0000 0000 0110 0001 0100 1110 
 Hexadecimal:
   0x614e
+
 ```
 
 ### Decimal conversion
@@ -190,9 +193,12 @@ Binary:
   0000 0000 1011 1100 0110 0001 0100 1110 
 Hexadecimal:
   0xbc614e
+
 ```
 
 ### Hexadecimal conversion
+
+For hexadecimal input both prefix '0x' and postfix 'h' can be used.
 
 ```bash
 $ numconvert 0x12345678
@@ -204,4 +210,27 @@ Binary:
   0001 0010 0011 0100 0101 0110 0111 1000 
 Hexadecimal:
   0x12345678
+
+```
+### Help menu
+
+Any invalid input will cause the help menu to be printed.
+
+```bash
+$ ./numconvert
+Version 1.0.1
+
+Usage:
+  numconvert [prefix]<value>[postfix]
+
+No prefix/postfix:
+            to indicate a decimal value
+
+Prefixes:
+  0x or 0X, to indicate a hexadecimal value
+
+Postfixes:
+  b or B,   to indicate a binary value
+  h or H,   to indicate a hexadecimal value
+
 ```
