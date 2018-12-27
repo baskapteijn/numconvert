@@ -25,6 +25,8 @@ script:
   - ./functional_test.sh
   - cd ../../coverage/
   - ./coverage.sh
+  - cd ..
+  - cd build/
 
 deploy:
   provider: releases
