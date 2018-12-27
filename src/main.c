@@ -178,7 +178,7 @@ static void PrintHexadecimal(uint64_t number)
  *      The string to parse.
  * \param len
  *      The length of the input string (excluding the string terminator).
- * \number[out]
+ * \param[out] number
  *      The number represented by the numeric string.
  * \returns
  *      Always 0 (successful).
@@ -204,7 +204,7 @@ static int ParseBinary(const char *string, size_t len, uint64_t *number)
  *      The string to parse.
  * \param len
  *      The length of the input string (excluding the string terminator).
- * \number[out]
+ * \param[out] number
  *      The number represented by the numeric string.
  * \returns
  *      Always 0 (successful).
@@ -233,7 +233,7 @@ static int ParseDecimal(const char *string, size_t len, uint64_t *number)
  *      The string to parse.
  * \param len
  *      The length of the input string (excluding the string terminator).
- * \number[out]
+ * \param[out] number
  *      The number represented by the numeric string.
  * \returns
  *      Always 0 (successful).
