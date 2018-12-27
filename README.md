@@ -27,8 +27,8 @@ This readme assumes a Linux or Windows based host machine.
 From the build directory:
 ```bash
 $ cd build
-$ cmake ..
--- The C compiler identification is GNU 7.3.0
+$ cmake -D CMAKE_BUILD_TYPE=Release ..
+-- The C compiler identification is GNU 5.4.0
 -- Check for working C compiler: /usr/bin/cc
 -- Check for working C compiler: /usr/bin/cc -- works
 -- Detecting C compiler ABI info
@@ -44,14 +44,9 @@ Scanning dependencies of target numconvert
 [100%] Linking C executable numconvert
 [100%] Built target numconvert
 ```
-To switch between Debug and Release builds you can specify the option in the CMake command line:
+To switch to a Debug build you can specify the following option in the CMake command line:
 ```bash
 $ cmake -D CMAKE_BUILD_TYPE=Debug ..
-$ make
-```
-or:
-```bash
-$ cmake -D CMAKE_BUILD_TYPE=Release ..
 $ make
 ```
 ## Coverage
@@ -74,9 +69,9 @@ Processing file src/version.h
 Processing file src/main.c
 Writing directory view page.
 Overall coverage rate:
-  lines......: 96.8% (210 of 217 lines)
+  lines......: 96.2% (205 of 213 lines)
   functions..: 100.0% (19 of 19 functions)
-  branches...: 94.3% (115 of 122 branches)
+  branches...: 92.7% (115 of 124 branches)
 Script completed.
 ```
 The default browser will automatically display the results.
@@ -159,6 +154,30 @@ Test 10:successful
 Test 11:successful
 Test 12:successful
 Test 13:successful
+Test 14:successful
+Test 15:successful
+Test 16:successful
+Test 17:successful
+Test 18:successful
+Test 19:successful
+Test 20:successful
+Test 21:successful
+Test 22:successful
+Test 23:successful
+Test 24:successful
+Test 25:successful
+Test 26:successful
+Test 27:successful
+Test 28:successful
+Test 29:successful
+Test 30:successful
+Test 31:successful
+Test 32:successful
+Test 33:successful
+Test 34:successful
+Test 35:successful
+Test 36:successful
+Test 37:successful
 Script completed.
 ```
 
@@ -218,7 +237,7 @@ Any invalid input will cause the help menu to be printed.
 
 ```bash
 $ ./numconvert
-Version 1.0.1
+Version 1.0.2
 
 Usage:
   numconvert [prefix]<value>[postfix]
