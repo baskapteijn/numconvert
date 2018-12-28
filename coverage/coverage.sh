@@ -22,6 +22,7 @@ rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
     ./numconvert_cov 1111111111111111111111111111111111111111111111111111111111111111b
     ./numconvert_cov 111111111111111111111111111111111111111111111111111111111111111b
     ./numconvert_cov 18446744073709551615
+    ./numconvert_cov 184467440737095516154
     ./numconvert_cov 0xffffffffffffffff
     ./numconvert_cov 0xfffffffffffffffff
     ./numconvert_cov 0x0
@@ -32,6 +33,8 @@ rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
     ./numconvert_cov 112b
     ./numconvert_cov Aah
     ./numconvert_cov 18446744073709551616
+    ./numconvert_cov 17446744073709551616
+    ./numconvert_cov 1744674407370955161
     ./numconvert_cov 0xg
     ./numconvert_cov
     ./numconvert_cov ""
