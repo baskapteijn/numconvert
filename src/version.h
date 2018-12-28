@@ -20,7 +20,7 @@
 
 #define VERSION_MAJOR       1u
 #define VERSION_MINOR       0u
-#define VERSION_PATCH       3u
+#define VERSION_PATCH       4u
 
 #define VERSION_STRING_LEN  12 /* mjr.mnr.pat + \0 */
 
