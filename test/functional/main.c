@@ -93,9 +93,6 @@ static bool IsDecimal(const char *string, size_t len)
  *          argv[3] is the test input value, f.e. "0x12" or "" or even "1 2"
  *          argv[4] is the test expected return value, f.e. "0" between 0 and 255
  *          argv[5] is the test file that contains the expected (stdout)output, f.e. "tests/1.txt"
- *
- *      argv[3] accepts a special input 'NOARG' with allows the program under test to be called
- *      without any arguments.
  * \param argc
  *      The number of string pointed to by argv (argument count).
  * \param argv
@@ -135,12 +132,8 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    if (strncmp(argv[3], "NOARG", 5) != 0) {
-        snprintf(string, STRING_LENGTH_MAX, "%s %s", argv[2], argv[3]);
-    } else {
-        snprintf(string, STRING_LENGTH_MAX, "%s", argv[2]);
-    }
-   // printf("popen!\n");
+    snprintf(string, STRING_LENGTH_MAX, "%s %s", argv[2], argv[3]);
+
     stdoutFp = popen(string, "r");
     if (stdoutFp == NULL) {
         printf("unable to open test executable\n");
