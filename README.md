@@ -258,7 +258,7 @@ Any invalid input will cause the help menu to be printed.
 
 ```bash
 $ ./numconvert
-Version 1.0.3
+Version 1.0.4
 
 Usage:
   numconvert [prefix]<value>[postfix]

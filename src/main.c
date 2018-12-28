@@ -36,14 +36,14 @@ static bool IsHexadecimalChar(char c);
 static void PrintBinary(uint64_t number);
 static void PrintDecimal(uint64_t number);
 static void PrintHexadecimal(uint64_t number);
-static int ParseBinary(const char *string, size_t len, uint64_t *number);
-static int ParseDecimal(const char *string, size_t len, uint64_t *number);
-static int ParseHexadecimal(const char *string, size_t len, uint64_t *number);
+static void ParseBinary(const char *string, size_t len, uint64_t *number);
+static void ParseDecimal(const char *string, size_t len, uint64_t *number);
+static void ParseHexadecimal(const char *string, size_t len, uint64_t *number);
 static bool IsBinary(const char *string, size_t len);
 static bool IsDecimal(const char *string, size_t len);
 static bool IsHexadecimal(const char *string, size_t len);
 static void PrintNumerals(uint64_t number);
-static int ParseString(const char *string, size_t len, uint64_t *number, char base);
+static void ParseString(const char *string, size_t len, uint64_t *number, char base);
 static int CheckString(const char *string, size_t len, char *base);
 static void PrintHelp(void);
 
@@ -180,10 +180,8 @@ static void PrintHexadecimal(uint64_t number)
  *      The length of the input string (excluding the string terminator).
  * \param[out] number
  *      The number represented by the numeric string.
- * \returns
- *      Always 0 (successful).
  */
-static int ParseBinary(const char *string, size_t len, uint64_t *number)
+static void ParseBinary(const char *string, size_t len, uint64_t *number)
 {
     int64_t i = 0;
 
@@ -194,8 +192,6 @@ static int ParseBinary(const char *string, size_t len, uint64_t *number)
             *number += (uint64_t)1 << (len - 2 - i);
         }
     }
-
-    return 0;
 }
 
 /*!
@@ -206,10 +202,8 @@ static int ParseBinary(const char *string, size_t len, uint64_t *number)
  *      The length of the input string (excluding the string terminator).
  * \param[out] number
  *      The number represented by the numeric string.
- * \returns
- *      Always 0 (successful).
  */
-static int ParseDecimal(const char *string, size_t len, uint64_t *number)
+static void ParseDecimal(const char *string, size_t len, uint64_t *number)
 {
     uint64_t val = 0;
     int64_t i = 0;
@@ -223,8 +217,6 @@ static int ParseDecimal(const char *string, size_t len, uint64_t *number)
         *number += value;
         val *= 10;
     }
-
-    return 0;
 }
 
 /*!
@@ -235,10 +227,8 @@ static int ParseDecimal(const char *string, size_t len, uint64_t *number)
  *      The length of the input string (excluding the string terminator).
  * \param[out] number
  *      The number represented by the numeric string.
- * \returns
- *      Always 0 (successful).
  */
-static int ParseHexadecimal(const char *string, size_t len, uint64_t *number)
+static void ParseHexadecimal(const char *string, size_t len, uint64_t *number)
 {
     int64_t i = 0;
     uint64_t value = 0;
@@ -272,8 +262,6 @@ static int ParseHexadecimal(const char *string, size_t len, uint64_t *number)
         }
         *number |= value << ((start - i) * 4);
     }
-
-    return 0;
 }
 
 /*!
@@ -301,8 +289,10 @@ static bool IsBinary(const char *string, size_t len)
     }
 
     if (isBinary == true) {
-        if ((len < 2) ||
-            (len > BINARY_STRING_LEN_MAX)) {/* 64 characters + b */
+        /* No need to check for maximum length:
+         * - (len >= BINARY_STRING_LEN_MAX + 1), or BUFFER_SIZE, is covered by main()
+         */
+        if (len < 2) {
             /* This isn't gonna fit in UINT64_MAX. */
             isBinary = false;
         }
@@ -333,9 +323,10 @@ static bool IsDecimal(const char *string, size_t len)
     }
 
     if (isDecimal == true) {
-        if (len == 0) {
-            isDecimal = false;
-        } else if (len == DECIMAL_STRING_LEN_MAX) {
+        /* No need to check for minimum length:
+         * - (len == 0) is covered by CheckString()
+         */
+        if (len == DECIMAL_STRING_LEN_MAX) {
             for (i = 0; i < DECIMAL_STRING_LEN_MAX; i++) {
                 if ((string[i] - 0x30) > (DecimalStringValueMax[i] - 0x30)) {
                     /* This isn't gonna fit in UINT64_MAX. */
@@ -352,6 +343,7 @@ static bool IsDecimal(const char *string, size_t len)
         } else if (len > DECIMAL_STRING_LEN_MAX) {
             isDecimal = false;
         }
+        /* else: will not happen because it's protected by CheckString(). */
     }
 
     return isDecimal;
@@ -368,7 +360,7 @@ static bool IsDecimal(const char *string, size_t len)
  */
 static bool IsHexadecimal(const char *string, size_t len)
 {
-    bool isHexaDecimal = false;
+    bool isHexaDecimal = true;
     uint64_t i = 0;
     uint64_t start = 0;
     uint64_t end = 0;
@@ -385,19 +377,22 @@ static bool IsHexadecimal(const char *string, size_t len)
         end = len;
         minLen = 3;
         maxLen = HEXADECIMAL_0X_STRING_LEN_MAX;
+    } else {
+        isHexaDecimal = false;
     }
 
-    for (i = start; i < end; i++) {
-        isHexaDecimal = true;
-        if (IsHexadecimalChar(string[i]) == false) {
-            isHexaDecimal = false;
-            break;
+    if (isHexaDecimal == true) {
+        for (i = start; i < end; i++) {
+            if (IsHexadecimalChar(string[i]) == false) {
+                isHexaDecimal = false;
+                break;
+            }
         }
     }
 
     if (isHexaDecimal == true) {
         if ((len < minLen) ||
-            (len > maxLen)) {/* 0x + 16 characters */
+            (len > maxLen)) {
             /* This isn't gonna fit in UINT64_MAX. */
             isHexaDecimal = false;
         }
@@ -437,29 +432,19 @@ static void PrintNumerals(uint64_t number)
  *      The number represented by the numeric string in case it checked-out.
  * \param base
  *      The base of the numeric string.
- * \returns
- *      0 in case of successful completion or any other value in case of an error.
  */
-static int ParseString(const char *string, size_t len, uint64_t *number, const char base)
+static void ParseString(const char *string, size_t len, uint64_t *number, const char base)
 {
-    int retval = 0;
-
-    switch (base) {
-        case 'b':
-            retval = ParseBinary(string, len, number);
-            break;
-        case 'd':
-            retval = ParseDecimal(string, len, number);
-            break;
-        case 'h':
-            retval = ParseHexadecimal(string, len, number);
-            break;
-        default:
-            retval = -1;
-            break;
+    if (base == 'd') {
+        ParseDecimal(string, len, number);
+    } else if (base == 'h') {
+        ParseHexadecimal(string, len, number);
+    } else {
+        /* base == 'b' is the only one left.
+         * Nothing else will happen because it's protected by CheckString().
+         */
+        ParseBinary(string, len, number);
     }
-
-    return retval;
 }
 
 /*!
@@ -556,7 +541,7 @@ int main(int argc, char *argv[])
 
     /* Determine string length. */
     len = strlen(argv[1]);
-    if (len >= BUFFER_SIZE) {
+    if (len >= sizeof(string)) {
         PrintHelp();
         return -1;
     }
@@ -574,11 +559,7 @@ int main(int argc, char *argv[])
         return retval;
     }
 
-    retval = ParseString(string, len, &number, base);
-    if (retval != 0) {
-        PrintHelp();
-        return retval;
-    }
+    ParseString(string, len, &number, base);
 
     PrintNumerals(number);
 
