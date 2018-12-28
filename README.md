@@ -90,9 +90,9 @@ Processing file src/version.h
 Processing file src/main.c
 Writing directory view page.
 Overall coverage rate:
-  lines......: 96.2% (205 of 213 lines)
+  lines......: 100.0% (204 of 204 lines)
   functions..: 100.0% (19 of 19 functions)
-  branches...: 92.7% (115 of 124 branches)
+  branches...: 100.0% (120 of 120 branches)
 Script completed.
 ```
 The default browser will automatically display the results.
