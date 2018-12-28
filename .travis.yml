@@ -28,7 +28,7 @@ script:
   - ./coverage.sh
   - cd ..
   - cd build/
-  - i686-w64-mingw32-gcc -D__USE_MINGW_ANSI_STDIO -Wall -O3 -o numconvert.exe ../src/main.c
+  - i686-w64-mingw32-gcc -s -D__USE_MINGW_ANSI_STDIO -Wall -O3 -o numconvert.exe ../src/main.c
 
 deploy:
   provider: releases
