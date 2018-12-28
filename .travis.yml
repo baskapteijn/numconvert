@@ -11,6 +11,7 @@ addons:
       - cmake
       - lcov
       - valgrind
+      - mingw-w64
 
 script:
   - cd build/
@@ -27,11 +28,14 @@ script:
   - ./coverage.sh
   - cd ..
   - cd build/
+  - i686-w64-mingw32-gcc -D__USE_MINGW_ANSI_STDIO -Wall -O3 -o numconvert.exe ../src/main.c
 
 deploy:
   provider: releases
   api_key: $GITHUB_API_KEY
-  file: numconvert
+  file:
+    - numconvert
+    - numconvert.exe
   skip_cleanup: true
   on:
     tags: true
