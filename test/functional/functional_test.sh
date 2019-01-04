@@ -10,13 +10,14 @@ exit_on_error()
 
 # Compile numconvert
 {
-    gcc -Wall -O3 ../../src/main.c -o numconvert
+	cmake -D CMAKE_BUILD_TYPE=Release ../..
+	make
 } &> /dev/null
 rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
 
 # Compile the functional test program
 {
-    gcc -Wall -D_BSD_SOURCE -O3 main.c -o functional
+    gcc -Wall -D_BSD_SOURCE -O3 -s main.c -o functional
 } &> /dev/null
 rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
 
