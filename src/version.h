@@ -18,6 +18,8 @@
 #ifndef VERSION_H__
 #define VERSION_H__
 
+#include <stdio.h>
+
 #define VERSION_MAJOR       1u
 #define VERSION_MINOR       0u
 #define VERSION_PATCH       4u
