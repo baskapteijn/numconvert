@@ -1,6 +1,6 @@
 /*
  * This file is part of the numconvert distribution (https://github.com/baskapteijn/numconvert).
- * Copyright (c) 2018 Bas Kapteijn.
+ * Copyright (c) 2019 Bas Kapteijn.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,9 +22,9 @@
 
 #define VERSION_MAJOR       1u
 #define VERSION_MINOR       0u
-#define VERSION_PATCH       4u
+#define VERSION_PATCH       5u
 
-#define VERSION_STRING_LEN  12 /* mjr.mnr.pat + \0 */
+#define VERSION_STRING_LEN  12u /* mjr.mnr.pat + \0 */
 
 /*!
  * \brief Return the current version.
@@ -32,7 +32,7 @@
  *      Semantic versioning 2.0.0 as per <https://semver.org/>.
  *      Each part of the version number (major, minor, patch) shall be limited to a value no more
  *      than 255.
- * \returns
+ * \returns A char pointer to the version string.
  */
 static inline const char* GetVersionString(void)
 {

@@ -1,6 +1,6 @@
 /*
  * This file is part of the numconvert distribution (https://github.com/baskapteijn/numconvert).
- * Copyright (c) 2018 Bas Kapteijn.
+ * Copyright (c) 2019 Bas Kapteijn.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
