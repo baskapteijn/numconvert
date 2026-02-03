@@ -1,76 +1,83 @@
-#!/bin/bash
-# Prerequisites
-# Install lcov (f.e. for Ubuntu use "sudo apt-get install lcov")
+#!/usr/bin/env bash
+# coverage.sh — Generate coverage for numconvert
 
-exit_on_error()
-{
-    arg1=$1
+set -euo pipefail
 
-    echo "Failed to execute with error "$arg1". Exiting..."
-    exit $arg1
-}
+# Directory of this script
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+COV_DIR="$SCRIPT_DIR/coverage"
+BIN_NAME="numconvert_cov"
 
-# Compile the program with coverage options
-{
-    gcc -Wall -fprofile-arcs -ftest-coverage ../src/main.c -o numconvert_cov
-} &> /dev/null
-rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
+mkdir -p "$COV_DIR"
 
-# Execute the program and try to cover as much as possible
-# Ignore return codes, this is not a component test but purely for coverage
-{
-    ./numconvert_cov 1111111111111111111111111111111111111111111111111111111111111111b
-    ./numconvert_cov 111111111111111111111111111111111111111111111111111111111111111b
-    ./numconvert_cov 18446744073709551615
-    ./numconvert_cov 184467440737095516154
-    ./numconvert_cov 0xffffffffffffffff
-    ./numconvert_cov 0xfffffffffffffffff
-    ./numconvert_cov 0x0
-    ./numconvert_cov b
-    ./numconvert_cov h
-    ./numconvert_cov 111h
-    ./numconvert_cov 111111111111111111111111111111111111111111111111111111111111111111
-    ./numconvert_cov 112b
-    ./numconvert_cov Aah
-    ./numconvert_cov 18446744073709551616
-    ./numconvert_cov 17446744073709551616
-    ./numconvert_cov 1744674407370955161
-    ./numconvert_cov 0xg
-    ./numconvert_cov
-    ./numconvert_cov ""
-    ./numconvert_cov 0b
-    ./numconvert_cov -1
-    ./numconvert_cov 0x/
-    ./numconvert_cov 0z
-} &> /dev/null
+# Verbose flag
+VERBOSE=0
+if [[ "${1:-}" == "-v" ]]; then
+    VERBOSE=1
+fi
 
-# Output the coverage result
-{
-    gcov main.c
-} &> /dev/null
-rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
+echo "==> Cleaning old coverage artifacts"
+rm -f -- "$SCRIPT_DIR"/*.gcda "$SCRIPT_DIR"/*.gcno "$COV_DIR"/*.info
+rm -rf "$COV_DIR/html"
 
-# Create gcov files
-{
-    gcov -abcfu main.c
-} &> /dev/null
-rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
+echo "==> Building with coverage flags"
+if [ -f "$SCRIPT_DIR/Makefile" ]; then
+    make -C "$SCRIPT_DIR" CFLAGS="--coverage -O0 -g" >/dev/null
+else
+    gcc --coverage -O0 -g -o "$SCRIPT_DIR/$BIN_NAME" "$SCRIPT_DIR"/../src/*.c >/dev/null
+fi
 
-# Generate lcov data info
-{
-    lcov --rc lcov_branch_coverage=1 --directory . --capture --output-file coverage.info
-} &> /dev/null
-rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
+echo "==> Running test inputs (output suppressed by default)"
 
-# Generate html representation
-genhtml --branch-coverage coverage.info
-rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
+# 1️⃣ Run binary with no arguments
+if [[ "$VERBOSE" -eq 1 ]]; then
+    echo ">>> Running: $SCRIPT_DIR/$BIN_NAME"
+    "$SCRIPT_DIR/$BIN_NAME" || true
+else
+    "$SCRIPT_DIR/$BIN_NAME" >/dev/null 2>&1 || true
+fi
 
-{
-    sensible-browser index.html &
-} &> /dev/null
-rc=$?; if [[ $rc != 0 ]]; then exit_on_error $rc; fi
+# 2️⃣ Run all test inputs
+TEST_INPUTS=(
+    1111111111111111111111111111111111111111111111111111111111111111b
+    111111111111111111111111111111111111111111111111111111111111111b
+    18446744073709551615
+    184467440737095516154
+    0xffffffffffffffff
+    0xfffffffffffffffff
+    0x0
+    b
+    h
+    111h
+    111111111111111111111111111111111111111111111111111111111111111111
+    112b
+    Aah
+    18446744073709551616
+    17446744073709551616
+    1744674407370955161
+    0xg
+    ""
+    0b
+    -1
+    0x/
+    0z
+)
 
-echo "Script completed."
+for input in "${TEST_INPUTS[@]}"; do
+    if [[ "$VERBOSE" -eq 1 ]]; then
+        echo ">>> Running: $SCRIPT_DIR/$BIN_NAME $input"
+        "$SCRIPT_DIR/$BIN_NAME" "$input" || true
+    else
+        "$SCRIPT_DIR/$BIN_NAME" "$input" >/dev/null 2>&1 || true
+    fi
+done
 
-exit 0
+echo "==> Capturing coverage data"
+lcov --capture --directory "$SCRIPT_DIR" --output-file "$COV_DIR/coverage.info" --rc branch_coverage=1 >/dev/null
+
+echo "==> Generating HTML report"
+genhtml "$COV_DIR/coverage.info" --output-directory "$COV_DIR/html" --branch-coverage >/dev/null
+
+lcov --summary "$COV_DIR/coverage.info"
+
+echo "✅ HTML report available at: $COV_DIR/html/index.html"
